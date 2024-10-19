@@ -1,6 +1,6 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Chip from "../../Common/Chip";
-import ProfileCardDeck from "./ProfileCardDeck";
+import ProfileCardDeck from "./Components/ProfileCardDeck";
 
 export default function DoctorsProfile() {
   return (

@@ -1,13 +1,13 @@
 import { Button, Container, Stack, Typography } from "@mui/material";
 import Chip from "../../Common/Chip";
-import LatestAlbum from "./Components/LatestAlbum";
+import VideoCardDeck from "./Components/VideoCardDeck";
 
-export default function LatestPhotoAlbums() {
+export default function LatestVideos() {
   return (
     <Container sx={{ pt: "60px", pb: "60px" }}>
       <Stack gap="64px" alignItems="center">
         <Stack alignItems="center" gap="16px">
-          <Chip title={"Photo Album"} />
+          <Chip title={"Video Gallery"} />
           <Stack
             sx={{ width: "100%", maxWidth: "646px", textAlign: "center" }}
             gap="8px"
@@ -21,7 +21,7 @@ export default function LatestPhotoAlbums() {
             </Typography>
           </Stack>
         </Stack>
-        <LatestAlbum />
+        <VideoCardDeck />
         <Button variant="contained">See All</Button>
       </Stack>
     </Container>

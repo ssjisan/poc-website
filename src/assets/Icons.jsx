@@ -197,18 +197,42 @@ export const Album = ({ color, size }) => {
           stroke={color}
           stroke-width="1.5"
         />
-        <circle
-          cx="16.5"
-          cy="11.5"
-          r="1.5"
-          stroke={color}
-          stroke-width="1.5"
-        />
+        <circle cx="16.5" cy="11.5" r="1.5" stroke={color} stroke-width="1.5" />
         <path
           d="M20 20L17.1158 17.8514C16.1857 17.1586 14.8006 17.0896 13.7768 17.6851L13.51 17.8403C12.7985 18.2542 11.8306 18.1848 11.2157 17.6758L7.3775 14.4989C6.61142 13.8648 5.38257 13.8309 4.56722 14.4214L3.24329 15.3803"
           stroke={color}
           stroke-width="1.5"
           stroke-linecap="round"
+        />
+      </svg>
+    </div>
+  );
+};
+
+export const Play = ({ color, size }) => {
+  return (
+    <div
+      style={{
+        width: size,
+        height: size,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <svg
+        width={size}
+        height={size}
+        viewBox="0 0 24 24"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.13587 6.68152C8.63598 6.38159 8 6.74167 8 7.32464V16.6754C8 17.2583 8.63598 17.6184 9.13587 17.3185L16.9281 12.6431C17.4136 12.3518 17.4136 11.6482 16.9281 11.3569L9.13587 6.68152Z"
+          fill={color}
+          stroke={color}
+          stroke-width="1.5"
+          stroke-linejoin="round"
         />
       </svg>
     </div>
@@ -235,6 +259,10 @@ Pointer.propTypes = {
   size: PropTypes.string.isRequired,
 };
 Album.propTypes = {
+  color: PropTypes.string.isRequired,
+  size: PropTypes.string.isRequired,
+};
+Play.propTypes = {
   color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,
 };

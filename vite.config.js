@@ -13,5 +13,8 @@ export default defineConfig(({ mode }) => {
     },
     plugins: [react()],
     build: { chunkSizeWarningLimit: 1600 },
+    server: {
+      port: 5174, // Set your desired port here
+    },
   };
 });

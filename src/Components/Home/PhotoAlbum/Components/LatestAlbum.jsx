@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 
 export default function LatestAlbum() {
-    const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState([]);
 
   useEffect(() => {
     loadAlbums();
@@ -24,10 +24,9 @@ export default function LatestAlbum() {
     }
   };
 
-      
   return (
-    <Grid container spacing={2}>
-        <AlbumCard albums={albums}/>
+    <Grid container spacing={2} justifyContent="center">
+      <AlbumCard albums={albums} />
     </Grid>
-  )
+  );
 }

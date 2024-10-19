@@ -80,7 +80,7 @@ export default function Footer() {
         </Stack>
         <Box sx={BottomSx}>
           <Typography variant="body1" color="text.secondary">
-            POSB © {currentYear}
+          Pediatric Orthocare © {currentYear}
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Powered By{" "}

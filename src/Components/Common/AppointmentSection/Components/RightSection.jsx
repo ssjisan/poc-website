@@ -1,13 +1,14 @@
-import { Box, Stack, Typography } from "@mui/material";
+import { Box, Stack, Typography, useMediaQuery } from "@mui/material";
 import React from "react";
 
 export default function RightSection() {
+  const forBelow767 = useMediaQuery("(max-width:767px)")
   const ContainerSx = {
     backgroundImage: "url('/Appointment.png')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
-    height: "520px",
+    height: forBelow767 ? "420px" :"520px",
     borderRadius: "20px",
     padding:"24px",
     display:"flex",
