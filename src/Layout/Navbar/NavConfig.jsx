@@ -29,11 +29,11 @@ const main = [
     title: "Links",
     link: "/links",
   },
-  {
-    id:7,
-    title: "Contact",
-    link: "/contact",
-  },
+  // {
+  //   id:7,
+  //   title: "Contact",
+  //   link: "/contact",
+  // },
 ];
 
 export { main };

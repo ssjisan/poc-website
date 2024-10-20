@@ -87,7 +87,7 @@ export default function DetailsDrawer({
   return (
     <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
       <Box
-        sx={{ width: 380, background: "#F4F6F8", height: "100vh" }}
+        sx={{ width: 380, background: "#F4F6F8", height: "-webkit-fill-available" }}
         role="presentation"
       >
         <Stack

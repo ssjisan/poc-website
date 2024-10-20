@@ -9,6 +9,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
+import { Link } from "react-router-dom";
 // import Navbar from "../../Layout/Navbar/Navbar";
 
 export default function HeroSection() {
@@ -17,8 +18,8 @@ export default function HeroSection() {
   const forBelow790 = useMediaQuery("(max-width:790px)");
   const forBelow1200 = useMediaQuery("(max-width:1200px)");
   const MainBoxSx = {
-    height: forBelow676 ? "70vh" : forBelow790 ? "80vh": "90vh",
-    p: forBelow790 ? "84px 16px 16px 16px" :"84px 20px 20px 20px",
+    height: forBelow676 ? "70vh" : forBelow790 ? "80vh" : "90vh",
+    p: forBelow790 ? "84px 16px 16px 16px" : "84px 20px 20px 20px",
   };
   const ContainerSx = {
     backgroundImage: "url('/bg.png')",
@@ -27,7 +28,13 @@ export default function HeroSection() {
     backgroundPosition: "center",
     height: "100%",
     borderRadius: "32px",
-    p: forBelow676 ? "32px" : forBelow790 ? "64px 16px 16px 64px" : forBelow1200 ? "80px 20px 20px 80px" : "132px 24px 24px 132px"
+    p: forBelow676
+      ? "32px"
+      : forBelow790
+      ? "64px 16px 16px 64px"
+      : forBelow1200
+      ? "80px 20px 20px 80px"
+      : "132px 24px 24px 132px",
   };
   const AvatarSx = {
     width: "40px",
@@ -40,9 +47,9 @@ export default function HeroSection() {
   };
   return (
     <Box sx={MainBoxSx}>
-      <Stack container sx={ContainerSx} gap="40px">
-        <Stack gap="16px" sx={{width:"100%", maxWidth:"900px"}}>
-          <Stack gap={forBelow676 ? "16px":"0px"}>
+      <Stack container sx={ContainerSx} gap="40px" justifyContent="flex-start">
+        <Stack gap="16px" sx={{ width: "100%", maxWidth: "900px" }}>
+          <Stack gap={forBelow676 ? "16px" : "0px"}>
             <Stack
               direction="row"
               sx={{ position: "relative", alignItems: "center" }}
@@ -100,16 +107,24 @@ export default function HeroSection() {
                   zIndex: 4, // Lower z-index to keep it behind the previous ones
                 }}
               >
-                <Typography sx={{fontSize:forBelow396 && "10px"}}>1200+ happy patients</Typography>
+                <Typography sx={{ fontSize: forBelow396 && "10px" }}>
+                  1200+ happy patients
+                </Typography>
               </Box>
             </Stack>
             <Typography
               sx={{
-                fontSize: forBelow676 ? "28px !important" : forBelow790 ? "40px !important" : forBelow1200 ? "56px !important" : "60px !important",
+                fontSize: forBelow676
+                  ? "28px !important"
+                  : forBelow790
+                  ? "40px !important"
+                  : forBelow1200
+                  ? "56px !important"
+                  : "60px !important",
                 fontWeight: "700 !important",
                 color: "#FFF",
                 width: "100%",
-                lineHeight:"120%"
+                lineHeight: "120%",
               }}
             >
               We are a regional leader in pediatric orthopaedics
@@ -119,7 +134,7 @@ export default function HeroSection() {
             sx={{
               color: "#FFF",
               width: "100%",
-              fontSize: forBelow676 ? "14px !important" :"20px !important",
+              fontSize: forBelow676 ? "14px !important" : "20px !important",
               fontWeight: "400 !important",
             }}
           >
@@ -128,20 +143,21 @@ export default function HeroSection() {
             throughout our region.
           </Typography>
         </Stack>
-        <Button
-          variant="contained"
-          sx={{
-            width: "180px",
-            background: "#FFF",
-            color: "#20265B",
-            "&:hover": {
-              background: "rgba(0, 0, 0, 0.32)",
-              color: "#FFF",
-            },
-          }}
-        >
-          Book an appointment
-        </Button>
+        <Link to="/book_appointment">
+          <Button
+            variant="contained"
+            sx={{
+              background: "#FFF",
+              color: "#20265B",
+              "&:hover": {
+                background: "rgba(0, 0, 0, 0.32)",
+                color: "#FFF",
+              },
+            }}
+          >
+            Book an appointment
+          </Button>
+        </Link>
       </Stack>
     </Box>
   );

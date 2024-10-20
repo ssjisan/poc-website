@@ -2,10 +2,12 @@ import { Route, Routes } from "react-router-dom";
 import Home from "../Pages/Home";
 import Contact from "../Pages/Contact";
 import Gallerys from "../Pages/Gallery";
-import Member from "../Pages/Member";
 import { Toaster } from "react-hot-toast";
-import Journal from "../Pages/Journal";
-import Forms from "../Pages/Forms";
+import Services from "../Pages/Services";
+import ExerciseVideo from "../Pages/ExerciseVideo";
+import BookAnAppointment from "../Pages/BookAnAppointment";
+import Links from "../Pages/Links";
+import Articles from "../Pages/Articles";
 
 export default function MainRoute() {
   return (
@@ -13,11 +15,13 @@ export default function MainRoute() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="our_services" element={<Services />} />
         <Route path="gallery" element={<Gallerys />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="members" element={<Member />} />
-        <Route path="link" element={<Journal />} />
-        <Route path="forms" element={<Forms />} />
+        <Route path="exercise_video" element={<ExerciseVideo />} />
+        <Route path="book_appointment" element={<BookAnAppointment />} />
+        <Route path="links" element={<Links />} />
+        <Route path="articles" element={<Articles />} />
       </Routes>
     </>
   );

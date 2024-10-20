@@ -2,10 +2,14 @@ import { Box, Container, Grid } from "@mui/material";
 import React from "react";
 import LeftSection from "./Components/LeftSection";
 import RightSection from "./Components/RightSection";
+import { useLocation } from "react-router-dom";
 
 export default function AppointmentSection() {
+  const location = useLocation(); // Get current location
+
+  
   return (
-    <Box sx={{ pt: "60px", pb: "60px" }}>
+    <Box sx={{ pt: location.pathname === "/our_services" ? "120px" : "60px", pb: "60px" }}>
       <Container>
         <Grid container spacing={2}>
           <Grid item xs={12} sm={12} md={6} lg={6}>

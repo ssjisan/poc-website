@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import { Logo } from "../../assets/Logo";
 import { main } from "./NavConfig";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Symbolic } from "../../assets/Symbolic";
 import { Menu } from "../../assets/Icons";
 export default function Navbar() {
@@ -16,6 +16,12 @@ export default function Navbar() {
   const forBelow1200 = useMediaQuery("(max-width:1200px)");
   const forBelow999 = useMediaQuery("(max-width:999px)");
   const forBelow399 = useMediaQuery("(max-width:399px)");
+
+  const linkStyle = {
+    textDecoration: "none",
+    fontWeight: 700,
+    borderRadius: "10px",
+  };
   return (
     <Stack
       sx={{
@@ -52,36 +58,40 @@ export default function Navbar() {
           <Stack direction="row" gap={forBelow1200 ? "4px" : "8px"}>
             {main.map((data) => {
               return (
-                <Stack
-                  sx={{
-                    p: "4px 16px",
-                    border:
-                      pathname === data.link &&
-                      "1px solid rgba(97, 60, 24, 0.32)",
-                    background:
-                      pathname === data.link && "rgba(97, 60, 24, 0.16)",
-                    height: forBelow1200 ? "36px" : "40px",
-                    borderRadius: "8px",
-                    cursor: "pointer",
-                  }}
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <Typography
-                    color={
-                      pathname === data.link ? "secondary" : "text.primary"
-                    }
-                    sx={{ fontWeight: 700 }}
+                <Link to={data.link} style={linkStyle}>
+                  <Stack
+                    sx={{
+                      p: "4px 16px",
+                      border:
+                        pathname === data.link &&
+                        "1px solid rgba(32, 38, 91, 0.32)",
+                      background:
+                        pathname === data.link && "rgba(32, 38, 91, 0.16)",
+                      height: forBelow1200 ? "36px" : "40px",
+                      borderRadius: "8px",
+                      cursor: "pointer",
+                    }}
+                    justifyContent="center"
+                    alignItems="center"
                   >
-                    {data.title}
-                  </Typography>
-                </Stack>
+                    <Typography
+                      color={
+                        pathname === data.link ? "primary" : "text.primary"
+                      }
+                      sx={{ fontWeight: 700 }}
+                    >
+                      {data.title}
+                    </Typography>
+                  </Stack>
+                </Link>
               );
             })}
           </Stack>
-          <Button variant="contained" size={forBelow1200 ? "small" : "large"}>
-            Book an appointment
-          </Button>
+          <Link to="/book_appointment">
+            <Button variant="contained" size={forBelow1200 ? "small" : "large"}>
+              Book an appointment
+            </Button>
+          </Link>
         </>
       )}
     </Stack>
