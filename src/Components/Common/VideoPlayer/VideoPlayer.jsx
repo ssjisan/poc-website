@@ -1,7 +1,7 @@
 import { Box, IconButton, Modal, useMediaQuery } from "@mui/material";
 // import { Cross } from "../../../assets/IconSet";
 import PropTypes from "prop-types";
-import { Menu } from "../../../assets/Icons";
+import { Cross } from "../../../assets/Icons";
 
 export default function VideoPlayer({ open, handleCloseVideoPlayer, selectedVideo }) {
   const forBelow767 = useMediaQuery("(max-width:767px)");
@@ -56,7 +56,7 @@ export default function VideoPlayer({ open, handleCloseVideoPlayer, selectedVide
             },
           }}
         >
-          <Menu size={24} color="red" />
+          <Cross size={24} color="red" />
         </IconButton>
 
         {/* Responsive Video Player */}

@@ -8,11 +8,31 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import InputFields from "./InputFields";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 export default function BookAppointmentForm() {
   const forBelow390 = useMediaQuery("(max-width:390px)");
   const forBelow776 = useMediaQuery("(max-width:776px)");
   const forBelow1024 = useMediaQuery("(max-width:1240px)");
+
+  const [profiles, setProfiles] = useState([]); // Profiles data
+  useEffect(() => {
+    loadProfiles();
+  }, []);
+
+  // Function to load profiles from the API
+  const loadProfiles = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/doctors`
+      );
+      setProfiles(data); // Update profiles state
+    } catch (err) {
+      toast.error("Problem loading doctors profile");
+    }
+  };
   return (
     <Container sx={{ p: "80px 24px" }}>
       <Grid container justifyContent="center">
@@ -25,7 +45,7 @@ export default function BookAppointmentForm() {
               width: "100%",
               borderRadius: "20px",
               background: "#fff",
-              boxShadow: "0px 8px 32px rgba(32, 38, 91, 0.16)"
+              boxShadow: "0px 8px 32px rgba(32, 38, 91, 0.16)",
             }}
           >
             <Stack gap="24px" sx={{ textAlign: "center" }}>
@@ -43,8 +63,10 @@ export default function BookAppointmentForm() {
                 appointment confirmed.
               </Typography>
             </Stack>
-            <InputFields />
-            <Button variant="contained" sx={{width:"210px"}}>Submit</Button>
+            <InputFields profiles={profiles}/>
+            <Button variant="contained" sx={{ width: "210px" }}>
+              Submit
+            </Button>
           </Stack>
         </Grid>
       </Grid>

@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Stack, Typography } from "@mui/material";
+import { Box, Button, Grid, Stack, Tooltip, Typography } from "@mui/material";
 import { Mail, Phone, Whatsapp } from "../../../../assets/Icons";
 
 export default function ProfileCard({ profiles, toggleDrawer }) {
@@ -41,48 +41,76 @@ export default function ProfileCard({ profiles, toggleDrawer }) {
 
               <Stack alignItems="center" gap="8px" sx={{ textAlign: "center" }}>
                 <Typography variant="h4">{data.name}</Typography>
-                <Typography color="text.secondary">{data.designation}</Typography>
+                <Typography color="text.secondary">
+                  {data.designation}
+                </Typography>
               </Stack>
 
               <Stack direction="row" gap="16px">
-                <Stack
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    width: "32px",
-                    height: "32px",
-                    background: "rgba(32, 38, 91, 0.16)",
-                    borderRadius: "6px",
-                  }}
-                >
-                  <Mail color="#20265B" size={22} />
-                </Stack>
-                <Stack
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    width: "32px",
-                    height: "32px",
-                    background: "rgba(32, 38, 91, 0.16)",
-                    borderRadius: "6px",
-                  }}
-                >
-                  <Phone color="#20265B" size={22} />
-                </Stack>
-                <Stack
-                  justifyContent="center"
-                  alignItems="center"
-                  sx={{
-                    width: "32px",
-                    height: "32px",
-                    background: "rgba(32, 38, 91, 0.16)",
-                    borderRadius: "6px",
-                  }}
-                >
-                  <Whatsapp color="#20265B" size={22} />
-                </Stack>
+                <Tooltip title={data.email}>
+                  <a
+                    aria-label="Send an Email"
+                    href={`mailto:${data.email}`}
+                    target="_blank"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Stack
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{
+                        width: "32px",
+                        height: "32px",
+                        background: "rgba(32, 38, 91, 0.16)",
+                        borderRadius: "6px",
+                      }}
+                    >
+                      <Mail color="#20265B" size={22} />
+                    </Stack>
+                  </a>
+                </Tooltip>
+                <Tooltip title={data.phone}>
+                  <a
+                    aria-label="Call on Phone"
+                    href={`tel:+${data.phone}`}
+                    target="_blank"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Stack
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{
+                        width: "32px",
+                        height: "32px",
+                        background: "rgba(32, 38, 91, 0.16)",
+                        borderRadius: "6px",
+                      }}
+                    >
+                      <Phone color="#20265B" size={22} />
+                    </Stack>
+                  </a>
+                </Tooltip>
+                <Tooltip title={data.whatsApp}>
+                  <a
+                    aria-label="Chat on WhatsApp"
+                    href={`https://wa.me/+${data.whatsApp}`}
+                    target="_blank"
+                    style={{ textDecoration: "none" }}
+                  >
+                    <Stack
+                      justifyContent="center"
+                      alignItems="center"
+                      sx={{
+                        width: "32px",
+                        height: "32px",
+                        background: "rgba(32, 38, 91, 0.16)",
+                        borderRadius: "6px",
+                      }}
+                    >
+                      <Whatsapp color="#20265B" size={22} />
+                    </Stack>
+                  </a>
+                </Tooltip>
               </Stack>
-
               <Stack direction="row" sx={{ width: "100%" }} gap="8px">
                 <Button
                   sx={{ width: "100%" }}

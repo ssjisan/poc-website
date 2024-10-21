@@ -3,8 +3,7 @@ import ImageGallery from "react-image-gallery";
 import "react-image-gallery/styles/css/image-gallery.css";
 import PropTypes from "prop-types";
 import "./PhotoViewerStyles.css";
-import { Menu } from "../../../assets/Icons";
-// import { Cross } from "../../../assets/IconSet";
+import { Cross } from "../../../assets/Icons";
 
 export default function PhotoViewer({
   open,
@@ -51,7 +50,7 @@ export default function PhotoViewer({
             bgcolor: "white", // Remove background
           }}
         >
-          <Menu size={24} color="red" />
+          <Cross size={24} color="red" />
         </IconButton>
 
         <ImageGallery items={galleryImages} />
