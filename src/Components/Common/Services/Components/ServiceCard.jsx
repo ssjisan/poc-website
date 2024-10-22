@@ -1,60 +1,29 @@
-import { Grid, Stack, Typography } from "@mui/material";
-import React from "react";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ServiceCard() {
-  const services = [
-    {
-      id: 1,
-      title: "Club Foot",
-      subtitle:
-        "Clubfoot refers to a condition in which a newborn's foot or feet appear to be rotated internally at the ankle.",
-    },
-    {
-      id: 2,
-      title: "Knock Knee and Bow Knee",
-      subtitle:
-        "Knock-knee is when the knees are close together and space between the ankles is increased.",
-    },
-    {
-      id: 3,
-      title: "Dysplasia of Hip",
-      subtitle:
-        "Hip dysplasia is the medical term for a hip socket that doesn't fully cover the ball portion of the upper thigh bone.",
-    },
-    {
-      id: 4,
-      title: "Cerebral Palsy",
-      subtitle:
-        "Cerebral palsy (CP) is a group of disorders that affect a person's ability to move and maintain balance and posture.",
-    },
-    {
-      id: 5,
-      title: "Growth Plate Injury",
-      subtitle:
-        "The growth plates around the knee are more sensitive to injury. A growth plate fracture at the knee can lead to long-term complications.",
-    },
-    {
-      id: 6,
-      title: "Musculoskeletal Infection",
-      subtitle:
-        "Musculoskeletal injury refers to damage to muscular or skeletal systems, which is usually due to a strenuous activity or trauma.",
-    },
-    {
-      id: 7,
-      title: "Brachial Plexus Birth Palsy",
-      subtitle:
-        "Palsy means weakness, and brachial plexus birth palsy causes arm weakness and loss of motion due to nerve injury during childbirth.",
-    },
-    {
-      id: 8,
-      title: "Pediatric Trauma, Tumor",
-      subtitle:
-        "Trauma in children, also known as pediatric trauma, refers to a traumatic injury that happens to an infant or child, which can include tumors.",
-    },
-  ];
+  const [treatments, setTreatments] = useState([]);
+
+  useEffect(() => {
+    loadTreatments();
+  }, []);
+
+  const loadTreatments = async () => {
+    try {
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_SERVER_API}/treatments_list`
+      );
+      setTreatments(data);
+    } catch (err) {
+      toast.error("Can't load treatment lists");
+    }
+  };
+  
   return (
     <>
-      {services.map((data) => {
+      {treatments.map((data) => {
         return (
           <Grid item xs={12} sm={6} md={4} lg={3} key={data.id}>
             <Stack
@@ -68,9 +37,10 @@ export default function ServiceCard() {
                   boxShadow: "-24px 24px 72px -8px rgba(145, 158, 171, 0.24)", // Box shadow on hover
                 },
               }}
-              gap="16px"
+              gap="24px"
             >
-              <Typography variant="h6">{data.title}</Typography>
+              <Stack gap="16px">
+              <Typography variant="h5">{data.title}</Typography>
               <Typography
                 variant="body1"
                 color="text.secondary"
@@ -83,7 +53,11 @@ export default function ServiceCard() {
                   textOverflow: "ellipsis",
                 }}
               >
-                {data.subtitle}
+                {data.subTitle}
+              </Typography>
+              </Stack>
+              <Typography sx={{textDecoration:"underline", cursor:"pointer"}} color="primary">
+              See related articles
               </Typography>
             </Stack>
           </Grid>

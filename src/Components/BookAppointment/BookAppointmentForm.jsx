@@ -132,6 +132,9 @@ export default function BookAppointmentForm() {
           email: "",
           message: "",
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         setAppointmentDate(null);
       } else {
         toast.error("Failed to submit the appointment.");

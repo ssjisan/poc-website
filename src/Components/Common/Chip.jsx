@@ -6,14 +6,14 @@ export default function Chip({title}) {
     <Stack
     sx={{
       p: "4px 16px",
-      background: "rgba(97, 60, 24, 0.16)",
+      background: "rgba(32, 38, 91, 0.16)",
       borderRadius: "100px",
       height: "40px",
     }}
     justifyContent="center"
     alignItems="center"
   >
-    <Typography sx={{ color: "#613C18" }}>{title}</Typography>
+    <Typography sx={{ color: "rgba(32, 38, 91, 1)" }}>{title}</Typography>
   </Stack>
   )
 }

@@ -5,8 +5,6 @@ import dayjs from "dayjs"; // Optional: import to handle dates directly
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { ArrowDown } from "../../assets/Icons";
 
-
-
 export default function InputFields({
   profiles,
   CalenderIcon,
@@ -15,7 +13,7 @@ export default function InputFields({
   shouldDisableDate,
   appointmentDate,
   formData,
-  setAppointmentDate
+  setAppointmentDate,
 }) {
   // Restrict to next 30 days
   const today = dayjs();
@@ -27,6 +25,7 @@ export default function InputFields({
         fullWidth
         options={profiles}
         getOptionLabel={(option) => option.name}
+        value={formData.selectedDoctor} // Controlled by formData
         onChange={handleDoctorChange}
         popupIcon={<ArrowDown color="#727373" size={24} />}
         renderInput={(params) => (

@@ -15,7 +15,7 @@ export default function MainRoute() {
       <Toaster />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="our_services" element={<Services />} />
+        <Route path="treatments" element={<Services />} />
         <Route path="gallery" element={<Gallerys />} />
         <Route path="contact" element={<Contact />} />
         <Route path="exercise_video" element={<ExerciseVideo />} />
