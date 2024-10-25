@@ -21,7 +21,7 @@ export default function JournalTable() {
   const loadJournals = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/links`
+        `${process.env.REACT_APP_SERVER_API}/journals`
       );
       setJournals(data);
     } catch (err) {

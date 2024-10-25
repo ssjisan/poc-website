@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  CircularProgress,
   Container,
   Grid,
   Stack,
@@ -17,6 +18,7 @@ export default function BookAppointmentForm() {
   const [appointmentDate, setAppointmentDate] = useState(null); // To store selected date
   const [availableDays, setAvailableDays] = useState([]); // For doctor's available consultation days
   const [profiles, setProfiles] = useState([]); // Profiles data
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadProfiles();
@@ -92,7 +94,7 @@ export default function BookAppointmentForm() {
   // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Ensure all required fields are filled
     if (
       !formData.selectedDoctor ||
@@ -105,15 +107,17 @@ export default function BookAppointmentForm() {
       return;
     }
 
-    // Prepare data to submit
     const dataToSubmit = {
       doctorInfo: formData.selectedDoctor._id,
-      preferredDate: appointmentDate.toISOString(), // Send date in ISO format
+      preferredDate: appointmentDate.toISOString(),
       name: formData.name,
       phone: formData.phone,
       email: formData.email,
       message: formData.message,
     };
+
+    const loadingToastId = toast.loading("Sending appointment request...");
+    setLoading(true); // Set loading state to true
 
     try {
       const response = await axios.post(
@@ -122,7 +126,9 @@ export default function BookAppointmentForm() {
       );
 
       if (response.status === 201) {
-        toast.success("Appointment submitted successfully!");
+        toast.success("Appointment submitted successfully!", {
+          id: loadingToastId,
+        });
         setFormData({
           selectedDoctor: null,
           location: "",
@@ -132,16 +138,20 @@ export default function BookAppointmentForm() {
           email: "",
           message: "",
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);
         setAppointmentDate(null);
+        // Reset form data
       } else {
-        toast.error("Failed to submit the appointment.");
+        toast.error("Failed to submit the appointment.", {
+          id: loadingToastId,
+        });
       }
     } catch (error) {
       console.error("Error submitting appointment:", error);
-      toast.error("An error occurred while submitting the appointment.");
+      toast.error("An error occurred while submitting the appointment.", {
+        id: loadingToastId,
+      });
+    } finally {
+      setLoading(false); // Reset loading state
     }
   };
 
@@ -185,8 +195,16 @@ export default function BookAppointmentForm() {
               setAppointmentDate={setAppointmentDate} // Set selected appointment date
               formData={formData} // Pass form data state
             />
-            <Button type="submit" variant="contained" onClick={handleSubmit}>
-              Submit Appointment
+            <Button
+              type="submit"
+              variant="contained"
+              onClick={handleSubmit}
+              disabled={loading} // Disable button when loading
+              startIcon={
+                loading ? <CircularProgress size={20} color="inherit" /> : null
+              } // Show spinner
+            >
+              {loading ? "Sending..." : "Submit Appointment"}
             </Button>
           </Stack>
         </Grid>

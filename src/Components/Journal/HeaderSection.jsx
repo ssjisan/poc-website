@@ -8,7 +8,7 @@ export default function HeaderSection() {
         <Box component="span" sx={{ fontWeight: "300 !important" }}>
           List of Important
         </Box>{" "}
-        Links
+        Journals
       </Typography>
       <Box
         sx={{

@@ -21,19 +21,14 @@ const main = [
   },
   {
     id: 5,
-    title: "Articles",
-    link: "/articles",
+    title: "Blog",
+    link: "/blog",
   },
   {
     id: 6,
     title: "Links",
     link: "/links",
   },
-  // {
-  //   id:7,
-  //   title: "Contact",
-  //   link: "/contact",
-  // },
 ];
 
 export { main };

@@ -8,6 +8,7 @@ import ExerciseVideo from "../Pages/ExerciseVideo";
 import BookAnAppointment from "../Pages/BookAnAppointment";
 import Links from "../Pages/Links";
 import Articles from "../Pages/Articles";
+import BlogPreview from "../Pages/BlogPreview";
 
 export default function MainRoute() {
   return (
@@ -21,7 +22,8 @@ export default function MainRoute() {
         <Route path="exercise_video" element={<ExerciseVideo />} />
         <Route path="book_appointment" element={<BookAnAppointment />} />
         <Route path="links" element={<Links />} />
-        <Route path="articles" element={<Articles />} />
+        <Route path="blog" element={<Articles />} />
+        <Route path="blog/:slug" element={<BlogPreview />} />
       </Routes>
     </>
   );

@@ -7,7 +7,7 @@ export default function JournalList() {
   const forBelow767 = useMediaQuery("(max-width:767px)");
 
   return (
-    <Box sx={{ p: forBelow767 ? "100px 0px 40px 0px" : "210px 0px 64px 0px" }}>
+    <Box sx={{ p: "60px 0px" }}>
       <Container
         sx={{
           display: "flex",
@@ -17,7 +17,7 @@ export default function JournalList() {
       >
         <HeaderSection />
         <Box>
-          <JournalTable/>
+          <JournalTable />
         </Box>
       </Container>
     </Box>

@@ -136,8 +136,6 @@ export default function DetailsDrawer({
       <Box
         sx={{
           width: 380,
-          background: "#F4F6F8",
-          height: "-webkit-fill-available",
         }}
         role="presentation"
       >

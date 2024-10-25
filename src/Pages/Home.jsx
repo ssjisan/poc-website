@@ -6,6 +6,7 @@ import HeroSection from "../Components/Home/HeroSection";
 import LatestVideos from "../Components/Common/VideoGallery/VideoGallery";
 import Footer from "../Layout/Footer/Footer";
 import Navbar from "../Layout/Navbar/Navbar";
+import BlogSection from "../Components/Common/Articles/BlogSection";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <PhotoAlbums />
       <AppointmentSection />
       <LatestVideos />
+      <BlogSection />
       <Footer />
     </>
   );

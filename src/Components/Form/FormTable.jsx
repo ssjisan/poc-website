@@ -31,27 +31,54 @@ export default function FormTable() {
   return (
     <Grid container>
       <Grid item xs={12} sm={12} md={12} lg={12}>
-        <TableContainer component={Paper} sx={{boxShadow:"none", borderRadius:"8px",border:"1px solid rgba(224, 224, 224, 1)"}}>
-          <Table sx={{ minWidth: 650,}}>
+        <TableContainer
+          component={Paper}
+          sx={{
+            boxShadow: "none",
+            borderRadius: "8px",
+            border: "1px solid rgba(224, 224, 224, 1)",
+          }}
+        >
+          <Table sx={{ minWidth: 650 }}>
             <TableHead>
               <TableRow>
-                <TableCell sx={{width:"72px",borderRight:"1px solid rgba(224, 224, 224, 1)"}}>No</TableCell>
-                <TableCell align="left" sx={{borderRight:"1px solid rgba(224, 224, 224, 1)"}}>Title</TableCell>
-                <TableCell align="left" sx={{width:"120px"}}>Preview</TableCell>
+                <TableCell
+                  sx={{
+                    width: "72px",
+                    borderRight: "1px solid rgba(224, 224, 224, 1)",
+                  }}
+                >
+                  No
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                >
+                  Title
+                </TableCell>
+                <TableCell align="left" sx={{ width: "120px" }}>
+                  Preview
+                </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {journals.map((row,i) => (
-                <TableRow
-                  key={row.name}
-                >
-                  <TableCell sx={{width:"72px",borderRight:"1px solid rgba(224, 224, 224, 1)"}}>
-                    {i+1}
+              {journals.map((row, i) => (
+                <TableRow key={row.name}>
+                  <TableCell
+                    sx={{
+                      width: "72px",
+                      borderRight: "1px solid rgba(224, 224, 224, 1)",
+                    }}
+                  >
+                    {i + 1}
                   </TableCell>
-                  <TableCell  align="left" sx={{borderRight:"1px solid rgba(224, 224, 224, 1)"}}>
-                  {row.title}
+                  <TableCell
+                    align="left"
+                    sx={{ borderRight: "1px solid rgba(224, 224, 224, 1)" }}
+                  >
+                    {row.title}
                   </TableCell>
-                  <TableCell align="left" sx={{width:"120px"}}>
+                  <TableCell align="left" sx={{ width: "120px" }}>
                     <a href={row.link} target="_blank">
                       Click Here
                     </a>

@@ -342,6 +342,7 @@ export const Cross = ({ color, size }) => {
     </div>
   );
 };
+
 Menu.propTypes = {
   color: PropTypes.string.isRequired,
   size: PropTypes.string.isRequired,

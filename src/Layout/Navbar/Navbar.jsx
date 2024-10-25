@@ -11,6 +11,7 @@ import { main } from "./NavConfig";
 import { Link, useLocation } from "react-router-dom";
 import { Symbolic } from "../../assets/Symbolic";
 import { Menu } from "../../assets/Icons";
+
 export default function Navbar() {
   const { pathname } = useLocation();
   const forBelow1200 = useMediaQuery("(max-width:1200px)");
@@ -22,6 +23,16 @@ export default function Navbar() {
     fontWeight: 700,
     borderRadius: "10px",
   };
+
+  const isActiveLink = (link) => {
+    if (link === "/") {
+      // If the link is for "Home", only mark it active when the pathname is exactly "/"
+      return pathname === "/";
+    }
+    // For other links, check if the pathname starts with the link path
+    return pathname.startsWith(link);
+  };
+
   return (
     <Stack
       sx={{
@@ -57,16 +68,14 @@ export default function Navbar() {
         <>
           <Stack direction="row" gap={forBelow1200 ? "4px" : "8px"}>
             {main.map((data) => {
+              const isActive = isActiveLink(data.link);
               return (
-                <Link to={data.link} style={linkStyle}>
+                <Link to={data.link} style={linkStyle} key={data.id}>
                   <Stack
                     sx={{
                       p: "4px 16px",
-                      border:
-                        pathname === data.link &&
-                        "1px solid rgba(32, 38, 91, 0.32)",
-                      background:
-                        pathname === data.link && "rgba(32, 38, 91, 0.16)",
+                      border: isActive && "1px solid rgba(32, 38, 91, 0.32)",
+                      background: isActive && "rgba(32, 38, 91, 0.16)",
                       height: forBelow1200 ? "36px" : "40px",
                       borderRadius: "8px",
                       cursor: "pointer",
@@ -75,9 +84,7 @@ export default function Navbar() {
                     alignItems="center"
                   >
                     <Typography
-                      color={
-                        pathname === data.link ? "primary" : "text.primary"
-                      }
+                      color={isActive ? "primary" : "text.primary"}
                       sx={{ fontWeight: 700 }}
                     >
                       {data.title}
