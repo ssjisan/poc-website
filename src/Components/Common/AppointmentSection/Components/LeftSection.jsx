@@ -43,7 +43,7 @@ export default function LeftSection() {
           </Stack>
         </Stack>
       </Stack>
-      <Link to="/book_appointment">
+      <Link to="/book_appointment" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
         <Button variant="contained">Book an Appointment</Button>
       </Link>
     </Stack>

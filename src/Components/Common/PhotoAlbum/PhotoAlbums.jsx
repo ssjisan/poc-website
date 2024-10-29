@@ -30,7 +30,7 @@ export default function PhotoAlbums() {
         </Stack>
         <AllAlbum />
         {location.pathname === "/" && (
-          <Link to="/gallery">
+          <Link to="/gallery" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Button variant="contained">See All</Button>
           </Link>
         )}

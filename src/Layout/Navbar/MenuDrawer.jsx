@@ -1,7 +1,7 @@
 import { Box, Drawer, Typography, useMediaQuery } from "@mui/material";
 import { main } from "./NavConfig";
 import { Link, useLocation } from "react-router-dom";
-import { Close, Phone, Whatsapp } from "../../assets/Icons";
+import { Cross, Phone, Whatsapp } from "../../assets/Icons";
 
 //eslint-disable-next-line
 export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
@@ -74,14 +74,14 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
       >
         <Box sx={TopBarSx}>
           <Box sx={CloseButtonSx} onClick={handleDrawerClose}>
-            <Close />
+            <Cross size="24px" color="#000"/>
           </Box>
         </Box>
         <Box sx={MenuSx}>
           {main.map((data) => {
             return (
               <Box key={data.id} onClick={goToTop}>
-                <Link to={data.link} style={linkStyle}>
+                <Link to={data.link} style={linkStyle} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                   <Box
                     sx={{
                       ...MenuButtonSx,
@@ -97,82 +97,6 @@ export default function MenuDrawer({ toggleDrawer, handleDrawerClose, open }) {
               </Box>
             );
           })}
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            gap: "16px",
-            p: "16px",
-            alignItems: "flex-start",
-            flexDirection: "column",
-            mt: "64px",
-            width: "100%",
-          }}
-        >
-          <a
-            aria-label="Chat on WhatsApp"
-            href="https://wa.me/+8801534919618"
-            target="_blank"
-            style={{ textDecoration: "none", width: "100%" }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                backgroundColor: "#F2F5FF",
-                p: "8px 12px",
-                borderRadius: "8px",
-              }}
-            >
-              <Whatsapp color={"#0D0A25"} size={"24px"} />
-              <Typography
-                sx={{
-                  fontSize: "16px",
-                  color: "#0D0A25",
-                }}
-              >
-                +8801534919618
-              </Typography>
-            </Box>
-          </a>
-          <Box
-            sx={{
-              display: "flex",
-              gap: "24px",
-              alignItems: "flex-start",
-              flexDirection: "column",
-              width: "100%",
-            }}
-          >
-            <a
-              aria-label="Call on Phone"
-              href="tel:+8801740559555"
-              target="_blank"
-              style={{ textDecoration: "none", width: "100%" }}
-            >
-              <Box
-                sx={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                  backgroundColor: "#F2F5FF",
-                  p: "8px 12px",
-                  borderRadius: "8px",
-                }}
-              >
-                <Phone color={"#0D0A25"} size={"24px"}/>
-                <Typography
-                  sx={{
-                    fontSize: "16px",
-                    color: "#0D0A25",
-                  }}
-                >
-                  +8801740559555
-                </Typography>
-              </Box>
-            </a>
-          </Box>
         </Box>
       </Box>
     </Drawer>

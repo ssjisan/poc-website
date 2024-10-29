@@ -64,7 +64,7 @@ export default function Footer() {
           >
             {main.map((data) => {
               return (
-                <Link to={data.link}>
+                <Link to={data.link} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                 <Box key={data.id}>
                   <Typography
                     color="text.primary"

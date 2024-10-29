@@ -30,8 +30,8 @@ export default function BlogSection() {
           </Stack>
         </Stack>
         <BlogCardDeck />
-        { (location.pathname === "/") || (location.pathname === "/treatments") && (
-          <Link to="/blog">
+        { (location.pathname === "/blog") || (location.pathname === "/") && (
+          <Link to="/blog" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Button variant="contained">See All</Button>
           </Link>
         )}

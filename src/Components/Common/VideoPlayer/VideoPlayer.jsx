@@ -21,14 +21,18 @@ export default function VideoPlayer({ open, handleCloseVideoPlayer, selectedVide
 
   const convertToEmbedUrl = (url) => {
     if (url.includes("youtube.com/watch?v=")) {
-      return url.replace("watch?v=", "embed/");
-    } else if (url.includes("youtu.be/")) {
-      const videoId = url.split("youtu.be/")[1];
+      // Strip out any additional parameters by splitting at '&'
+      const videoId = url.split("watch?v=")[1].split("&")[0];
       return `https://www.youtube.com/embed/${videoId}`;
+    } else if (url.includes("youtu.be/")) {
+      const videoId = url.split("youtu.be/")[1].split("&")[0];
+      return `https://www.youtube.com/embed/${videoId}`;
+    } else if (url.includes("drive.google.com/file/d/")) {
+      const videoId = url.split("/d/")[1].split("/")[0];
+      return `https://drive.google.com/file/d/${videoId}/preview`;
     }
     return ""; // Return an empty string if the format is not recognized
   };
-
   const embedUrl = selectedVideo ? convertToEmbedUrl(selectedVideo) : "";
 
   return (

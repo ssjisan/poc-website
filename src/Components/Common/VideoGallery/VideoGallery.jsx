@@ -7,7 +7,7 @@ export default function VideoGallery() {
   const location = useLocation();
 
   return (
-    <Container sx={{ pt: "60px", pb: "60px" }}>
+    <Container sx={{ pt: location.pathname === "/exercise_video" ? "120px" : "60px", pb: "60px" }}>
       <Stack gap="64px" alignItems="center">
         <Stack alignItems="center" gap="16px">
           <Chip title={"Video Gallery"} />
@@ -26,7 +26,7 @@ export default function VideoGallery() {
         </Stack>
         <VideoCardDeck />
         {location.pathname === "/" && (
-          <Link to="/gallery">
+          <Link to="/gallery" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <Button variant="contained">See All</Button>
           </Link>
         )}
