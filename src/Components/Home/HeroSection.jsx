@@ -22,7 +22,7 @@ export default function HeroSection() {
     p: forBelow790 ? "84px 16px 16px 16px" : "84px 20px 20px 20px",
   };
   const ContainerSx = {
-    backgroundImage: "url('/bg.png')",
+    backgroundImage: "url('/bg.webp')",
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",

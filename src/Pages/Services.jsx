@@ -8,8 +8,8 @@ export default function Services() {
   return (
     <>
       <Navbar />
-      <AppointmentSection />
       <ServicesSection />
+      <AppointmentSection />
       <BlogSection />
       <Footer />
     </>

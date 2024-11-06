@@ -147,7 +147,7 @@ export default function BookAppointmentForm() {
       }
     } catch (error) {
       console.error("Error submitting appointment:", error);
-      toast.error("An error occurred while submitting the appointment.", {
+      toast.error(error.message, {
         id: loadingToastId,
       });
     } finally {

@@ -2,10 +2,13 @@ import { Container, Stack, Typography } from "@mui/material";
 import React from "react";
 import Chip from "../Chip";
 import ServiceCardDeck from "./Components/ServiceCardDeck";
+import { useLocation } from "react-router-dom";
 
 export default function ServicesSection() {
+  const location = useLocation(); // Get current location
+
   return (
-    <Container sx={{ pt: "60px", pb: "60px" }}>
+    <Container sx={{ pt: location.pathname === "/treatments" ? "120px" : "60px", pb: "60px" }}>
       <Stack gap="80px">
         <Stack alignItems="center" gap="16px">
           <Chip title={"Treatments"} />
