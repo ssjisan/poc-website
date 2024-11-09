@@ -6,19 +6,27 @@ import {
   Grid,
   Stack,
   Typography,
+  TextField,
 } from "@mui/material";
 import InputFields from "./InputFields";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
-import days from "../../assets/days";
 import { Calender } from "../../assets/Icons";
 
 export default function BookAppointmentForm() {
-  const [appointmentDate, setAppointmentDate] = useState(null); // To store selected date
-  const [availableDays, setAvailableDays] = useState([]); // For doctor's available consultation days
   const [profiles, setProfiles] = useState([]); // Profiles data
   const [loading, setLoading] = useState(false);
+  const [appointmentDate, setAppointmentDate] = useState(null); // To store selected date
+  const days = [
+    { id: 1, label: "Saturday", value: "Saturday" },
+    { id: 2, label: "Sunday", value: "Sunday" },
+    { id: 3, label: "Monday", value: "Monday" },
+    { id: 4, label: "Tuesday", value: "Tuesday" },
+    { id: 5, label: "Wednesday", value: "Wednesday" },
+    { id: 6, label: "Thursday", value: "Thursday" },
+    { id: 7, label: "Friday", value: "Friday" },
+  ];
 
   useEffect(() => {
     loadProfiles();
@@ -28,7 +36,7 @@ export default function BookAppointmentForm() {
   const loadProfiles = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/doctors`
+        `${process.env.REACT_APP_SERVER_API}/availableDoctors`
       );
       setProfiles(data); // Update profiles state
     } catch (err) {
@@ -36,50 +44,52 @@ export default function BookAppointmentForm() {
     }
   };
 
+  // Custom calendar icon
+  const CalenderIcon = () => {
+    return <Calender color="#919EAB" size={24} />;
+  };
+
   const [formData, setFormData] = useState({
     selectedDoctor: null,
-    location: "",
-    preferredDay: "",
+    selectedLocation: null, // New field to store selected location
+    appointmentDate: null, // Store the selected date
     name: "",
     phone: "",
     email: "",
     message: "",
   });
 
-  // Watch for doctor selection change and update available days and location
-  useEffect(() => {
-    if (formData.selectedDoctor) {
-      const doctorDays = formData.selectedDoctor.consultationDays.map(
-        (dayId) => {
-          const day = days.find((d) => d.id === dayId);
-          return day?.label;
-        }
-      );
-      setAvailableDays(doctorDays); // Update available consultation days
-      setFormData((prevData) => ({
-        ...prevData,
-        location: formData.selectedDoctor.location, // Auto-fill doctor's location
-      }));
-    }
-  }, [formData.selectedDoctor]);
-
-  // Disable dates not available for the selected doctor
-  const shouldDisableDate = (date) => {
-    const dayName = date.format("dddd");
-    return !availableDays.includes(dayName); // Disable unavailable days
-  };
-
-  // Custom calendar icon
-  const CalenderIcon = () => {
-    return <Calender color="#919EAB" size={24} />;
-  };
-
   // Handle doctor selection
   const handleDoctorChange = (event, newValue) => {
     setFormData((prevData) => ({
       ...prevData,
-      selectedDoctor: newValue, // Store selected doctor
+      selectedDoctor: newValue,
+      selectedLocation: null, // Reset location when a new doctor is selected
     }));
+  };
+
+  // Handle location selection
+  const handleLocationChange = (event, locationName) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      selectedLocation: locationName,
+    }));
+  };
+
+  // Create the function to disable dates based on selected location
+  const shouldDisableDate = (date) => {
+    const selectedLocation = formData.selectedDoctor
+      ? profiles
+          .find((doc) => doc._id === formData.selectedDoctor)
+          ?.serialInfo.find((loc) => loc.location === formData.selectedLocation)
+      : null;
+
+    if (selectedLocation) {
+      const allowedDays = selectedLocation.consultationDays;
+      const dayId = days.find((day) => day.label === date.format("dddd"))?.id;
+      return !allowedDays.includes(dayId);
+    }
+    return false;
   };
 
   // Handle general input change for all other fields
@@ -87,71 +97,93 @@ export default function BookAppointmentForm() {
     const { id, value } = event.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value, // Update corresponding field in formData
+      [id]: value,
     }));
   };
 
-  // Handle form submission
+  const handleDateChange = (newDate) => {
+    if (newDate && newDate.isValid()) {
+      setAppointmentDate(newDate); // Update the local state with a dayjs object
+
+      // Correctly update formData with the formatted date string
+      setFormData((prevData) => ({
+        ...prevData,
+        appointmentDate: newDate.toISOString(), // Set appointmentDate with the ISO string
+      }));
+    } else {
+      setAppointmentDate(null);
+
+      // Ensure appointmentDate is reset to null in formData
+      setFormData((prevData) => ({
+        ...prevData,
+        appointmentDate: null,
+      }));
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // Ensure all required fields are filled
+    // Show loading toast
+    const toastId = toast.loading("Sending appointment request...");
+    setLoading(true);
     if (
       !formData.selectedDoctor ||
-      !appointmentDate ||
+      !formData.selectedLocation ||
+      !formData.appointmentDate ||
       !formData.name ||
       !formData.phone ||
       !formData.email
     ) {
-      toast.error("Please fill in all required fields.");
+      toast.error("Please fill in all required fields.",{
+        id: toastId,
+      });
       return;
     }
-
-    const dataToSubmit = {
-      doctorInfo: formData.selectedDoctor._id,
-      preferredDate: appointmentDate.toISOString(),
-      name: formData.name,
-      phone: formData.phone,
-      email: formData.email,
-      message: formData.message,
-    };
-
-    const loadingToastId = toast.loading("Sending appointment request...");
-    setLoading(true); // Set loading state to true
-
+    
     try {
+      // Prepare the data to send to the backend
+      const appointmentData = {
+        doctorInfo: formData.selectedDoctor,
+        selectedLocation: formData.selectedLocation,
+        appointmentDate: formData.appointmentDate,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        message: formData.message,
+      };
+      
+
+      // Send the data to the backend
       const response = await axios.post(
         `${process.env.REACT_APP_SERVER_API}/book_appointment`,
-        dataToSubmit
+        appointmentData
       );
 
       if (response.status === 201) {
-        toast.success("Appointment submitted successfully!", {
-          id: loadingToastId,
+        toast.success("Appointment created successfully!", {
+          id: toastId,
         });
+        // Reset the form
         setFormData({
           selectedDoctor: null,
-          location: "",
-          preferredDay: "",
+          selectedLocation: null,
+          appointmentDate: null,
           name: "",
           phone: "",
           email: "",
           message: "",
         });
         setAppointmentDate(null);
-        // Reset form data
       } else {
-        toast.error("Failed to submit the appointment.", {
-          id: loadingToastId,
+        toast.error("Failed to create appointment. Please try again.", {
+          id: toastId,
         });
       }
     } catch (error) {
-      console.error("Error submitting appointment:", error);
-      toast.error(error.message, {
-        id: loadingToastId,
+      toast.error("An error occurred while creating the appointment.", {
+        id: toastId,
       });
     } finally {
-      setLoading(false); // Reset loading state
+      setLoading(false);
     }
   };
 
@@ -186,25 +218,27 @@ export default function BookAppointmentForm() {
               </Typography>
             </Stack>
             <InputFields
-              profiles={profiles} // Pass loaded profiles
-              CalenderIcon={CalenderIcon} // Pass custom calendar icon
-              handleDoctorChange={handleDoctorChange} // Doctor change handler
-              handleInputChange={handleInputChange} // General input change handler
-              shouldDisableDate={shouldDisableDate} // Disable unavailable dates
-              appointmentDate={appointmentDate} // Selected appointment date
-              setAppointmentDate={setAppointmentDate} // Set selected appointment date
-              formData={formData} // Pass form data state
+              profiles={profiles}
+              formData={formData}
+              handleDoctorChange={handleDoctorChange}
+              handleLocationChange={handleLocationChange}
+              handleInputChange={handleInputChange}
+              CalenderIcon={CalenderIcon}
+              shouldDisableDate={shouldDisableDate}
+              appointmentDate={appointmentDate}
+              setAppointmentDate={setAppointmentDate}
+              handleDateChange={handleDateChange}
             />
+
+            {/* Submit Button */}
             <Button
-              type="submit"
               variant="contained"
+              color="primary"
+              fullWidth
               onClick={handleSubmit}
-              disabled={loading} // Disable button when loading
-              startIcon={
-                loading ? <CircularProgress size={20} color="inherit" /> : null
-              } // Show spinner
+              sx={{ mt: 2 }}
             >
-              {loading ? "Sending..." : "Submit Appointment"}
+              Book Appointment
             </Button>
           </Stack>
         </Grid>

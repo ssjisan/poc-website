@@ -15,6 +15,8 @@ export default function DetailsDrawer({
   profile,
   viewType,
 }) {
+  console.log(profile?.serialInfo);
+
   // Function to render the details view
   const renderDetailsView = () => (
     <>
@@ -102,35 +104,42 @@ export default function DetailsDrawer({
     { id: 7, label: "Friday", value: "Friday" },
   ];
 
-  const renderAppointmentInfoView = () => {
-    // Map the consultationDays (which are IDs) to their corresponding day labels
-    const consultationDayLabels = profile.consultationDays
-      .map((dayId) => days.find((day) => day.id === dayId)?.value)
-      .filter(Boolean); // Filter out any undefined values
-
-    return (
-      <>
-        <Stack gap="8px">
-          <Typography variant="h6">Location</Typography>
-          <Typography color="text.secondary">{profile.location}</Typography>
-        </Stack>
-        <Stack gap="8px">
-          <Typography variant="h6">Availability</Typography>
-          <Typography color="text.secondary">
-            {consultationDayLabels.join(", ")} <br /> at{" "}
-            {profile.consultationTime}
-          </Typography>
-        </Stack>
-        <Stack gap="8px">
-          <Typography variant="h6">For Serial</Typography>
-          <Typography color="text.secondary">
-            {profile.appointmentNumber}
-          </Typography>
-        </Stack>
-      </>
-    );
-  };
-
+  const renderAppointmentView = () => (
+    <>
+      {profile?.serialInfo?.map((data, index) => {
+        // Map day IDs to day labels
+        const dayLabels = data.consultationDays
+          ?.map((dayId) => {
+            const matchedDay = days.find((day) => day.id === dayId);
+            return matchedDay ? matchedDay.label : null;
+          })
+          .filter(Boolean); // Filter out any null values
+  
+        return (
+          <Box key={index} sx={{ mb: 2 }}>
+            <Stack gap="8px" sx={{mb:"16px"}}>
+              <Typography variant="h6">Location - 0{index+1}</Typography>
+              <Typography color="text.secondary">{data.location}</Typography>
+            </Stack>
+            <Stack gap="8px" sx={{mb:"16px"}}>
+              <Typography variant="h6">Availability</Typography>
+              <Typography color="text.secondary">
+                {dayLabels?.join(", ")} <br /> at {data.consultationTime}
+              </Typography>
+            </Stack>
+            <Stack gap="8px" sx={{mb:"16px"}}>
+              <Typography variant="h6">For Serial</Typography>
+              <Typography color="text.secondary">
+                {data.appointmentNumber}
+              </Typography>
+            </Stack>
+            {index < profile.serialInfo.length - 1 && <Divider />}
+          </Box>
+        );
+      })}
+    </>
+  );
+  
   return (
     <Drawer anchor="right" open={open} onClose={() => toggleDrawer(false)}>
       <Box
@@ -190,7 +199,7 @@ export default function DetailsDrawer({
             {/* Conditional Rendering based on viewType */}
             {viewType === "details"
               ? renderDetailsView()
-              : renderAppointmentInfoView()}
+              : renderAppointmentView()}
           </Stack>
         )}
       </Box>
