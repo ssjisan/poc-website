@@ -39,7 +39,7 @@ export default function BlogCardDeck() {
   const loadTreatments = async () => {
     try {
       const { data: treatmentData } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/treatments_list`
+        `${process.env.REACT_APP_SERVER_API}/guidance_list`
       );
       setTreatments(treatmentData);
     } catch (err) {
@@ -48,7 +48,7 @@ export default function BlogCardDeck() {
   };
 
   const blogToDisplay =
-    location.pathname === "/" || location.pathname === "/treatments"
+    location.pathname === "/" || location.pathname === "/parents_guidance"
       ? latestBlogs
       : blogs;
 

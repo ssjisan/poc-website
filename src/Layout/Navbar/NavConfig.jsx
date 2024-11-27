@@ -6,8 +6,8 @@ const main = [
   },
   {
     id: 2,
-    title: "Treatments",
-    link: "/treatments",
+    title: "Parents guidance",
+    link: "/parents_guidance",
   },
   {
     id: 3,

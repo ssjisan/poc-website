@@ -16,7 +16,7 @@ export default function ServiceCardDeck() {
     setLoading(true); // Set loading to true when starting to load data
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/treatments_list`
+        `${process.env.REACT_APP_SERVER_API}/guidance_list`
       );
       setTreatments(data);
     } catch (err) {
@@ -37,7 +37,6 @@ export default function ServiceCardDeck() {
                 borderRadius: "12px",
                 p: "24px",
                 border: "1px solid rgba(145, 158, 171, 0.24)",
-                borderRadius: "16px",
                 transition: "box-shadow 0.3s ease",
                 "&:hover": {
                   boxShadow: "-24px 24px 72px -8px rgba(145, 158, 171, 0.24)",

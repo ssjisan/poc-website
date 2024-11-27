@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Calender } from "../../assets/Icons";
+import dayjs from "dayjs";
 
 export default function BookAppointmentForm() {
   const [profiles, setProfiles] = useState([]); // Profiles data
@@ -67,6 +68,7 @@ export default function BookAppointmentForm() {
       selectedLocation: null, // Reset location when a new doctor is selected
     }));
   };
+console.log(formData);
 
   // Handle location selection
   const handleLocationChange = (event, locationName) => {
@@ -104,11 +106,10 @@ export default function BookAppointmentForm() {
   const handleDateChange = (newDate) => {
     if (newDate && newDate.isValid()) {
       setAppointmentDate(newDate); // Update the local state with a dayjs object
-
       // Correctly update formData with the formatted date string
       setFormData((prevData) => ({
         ...prevData,
-        appointmentDate: newDate.toISOString(), // Set appointmentDate with the ISO string
+        appointmentDate: dayjs(newDate).format('MMM DD, YYYY'), // Set appointmentDate with the ISO string
       }));
     } else {
       setAppointmentDate(null);

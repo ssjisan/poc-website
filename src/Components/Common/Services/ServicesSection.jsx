@@ -8,10 +8,10 @@ export default function ServicesSection() {
   const location = useLocation(); // Get current location
 
   return (
-    <Container sx={{ pt: location.pathname === "/treatments" ? "120px" : "60px", pb: "60px" }}>
+    <Container sx={{ pt: location.pathname === "/parents_guidance" ? "120px" : "60px", pb: "60px" }}>
       <Stack gap="80px">
         <Stack alignItems="center" gap="16px">
-          <Chip title={"Treatments"} />
+          <Chip title={"Parents guidance"} />
           <Stack
             sx={{ width: "100%", maxWidth: "580px", textAlign: "center" }}
             gap="8px"
