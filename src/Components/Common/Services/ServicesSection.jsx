@@ -13,10 +13,10 @@ export default function ServicesSection() {
         <Stack alignItems="center" gap="16px">
           <Chip title={"Parents guidance"} />
           <Stack
-            sx={{ width: "100%", maxWidth: "580px", textAlign: "center" }}
+            sx={{ width: "100%", maxWidth: "880px", textAlign: "center" }}
             gap="8px"
           >
-            <Typography variant="h1">Pediatric Care</Typography>
+            <Typography variant="h1">Get Moving With Healthy Bones & Healthy Children</Typography>
             <Typography color="text.secondary" variant="h6">
               Nurturing Healthy Futures: Comprehensive Pediatric Care for Every
               Stage of Childhood

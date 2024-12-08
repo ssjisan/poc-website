@@ -17,11 +17,11 @@ export default function BlogSection() {
         <Stack alignItems="center" gap="16px">
           <Chip title={"Patient Learning & Blog"} />
           <Stack
-            sx={{ width: "100%", maxWidth: "646px", textAlign: "center" }}
+            sx={{ width: "100%", maxWidth: "880px", textAlign: "center" }}
             gap="8px"
           >
             <Typography variant="h1">
-              Expert Articles on Holistic Patient Care and Wellness
+            Orthopedic Excellence of Children for a Lifetime of Mobility.
             </Typography>
             <Typography color="text.secondary" variant="h6">
               Discover the Importance of Integrating Holistic Approaches in

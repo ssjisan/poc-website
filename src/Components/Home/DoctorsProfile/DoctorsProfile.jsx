@@ -10,7 +10,7 @@ export default function DoctorsProfile() {
           <Chip title={"Medical Professionals"} />
           <Stack sx={{ width: "100%", maxWidth: "790px",textAlign: "center" }} gap="8px">
             <Typography variant="h1">
-              The Skilled Professionals Making A Difference At Mavis Clinic
+            Walking Tall, With Help From Our Orthopedist.
             </Typography>
             <Typography color="text.secondary" variant="h6">
               Meet the Dedicated Team of Experts Committed to Providing

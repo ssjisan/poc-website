@@ -20,7 +20,7 @@ export default function PhotoAlbums() {
             gap="8px"
           >
             <Typography variant="h1">
-              Memories and Milestones - A Visual Journey
+            Rebuilding Children's Bones, Rejuvenating Lives.
             </Typography>
             <Typography color="text.secondary" variant="h6">
               A curated collection of images capturing patient stories, events,

@@ -28,7 +28,10 @@ export default function HeroSection() {
     backgroundPosition: "center",
     height: "100%",
     borderRadius: "32px",
-    p: forBelow676
+    p:
+    window.innerHeight < 768 // Check for small heights
+      ? "16px" // Reduced padding for small screen height
+      : forBelow676
       ? "32px"
       : forBelow790
       ? "64px 16px 16px 64px"
@@ -48,7 +51,7 @@ export default function HeroSection() {
   return (
     <Box sx={MainBoxSx}>
       <Stack container sx={ContainerSx} gap="40px" justifyContent="flex-start">
-        <Stack gap="16px" sx={{ width: "100%", maxWidth: "900px" }}>
+        <Stack gap="16px" sx={{ width: "100%", maxWidth: "920px" }}>
           <Stack gap={forBelow676 ? "16px" : "0px"}>
             <Stack
               direction="row"
@@ -115,19 +118,19 @@ export default function HeroSection() {
             <Typography
               sx={{
                 fontSize: forBelow676
-                  ? "28px !important"
+                  ? "24px !important"
                   : forBelow790
-                  ? "40px !important"
+                  ? "32px !important"
                   : forBelow1200
-                  ? "56px !important"
-                  : "60px !important",
+                  ? "40px !important"
+                  : "52px !important",
                 fontWeight: "700 !important",
                 color: "#FFF",
                 width: "100%",
                 lineHeight: "120%",
               }}
             >
-              We are a regional leader in pediatric orthopaedics
+              Bringing Back the Rhythm in Your Children's Steps, Orthopedic Care at Its Best.
             </Typography>
           </Stack>
           <Typography
