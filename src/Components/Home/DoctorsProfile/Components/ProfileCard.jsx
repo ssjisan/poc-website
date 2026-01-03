@@ -8,8 +8,8 @@ export default function ProfileCard({ data, toggleDrawer }) {
         p: "16px",
         border: "1px solid rgba(145, 158, 171, 0.24)",
         borderRadius: "16px",
-        transition: "box-shadow 0.3s ease ",
-        transition: "border 0.3s ease",
+        transition: "box-shadow 0.3s ease, border 0.3s ease",
+
         "&:hover": {
           boxShadow: "-24px 24px 72px -8px rgba(145, 158, 171, 0.24)",
           border: "1px solid transparent",
