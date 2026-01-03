@@ -22,9 +22,7 @@ export default function BlogCardDeck() {
 
   const loadBlogs = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/blogs`
-      );
+      const { data } = await axios.get("/blogs");
       // Only take the first 3 items
       const latestVideos = data.slice(0, 3);
       setLatestBlogs(latestVideos);
@@ -39,7 +37,7 @@ export default function BlogCardDeck() {
   const loadTreatments = async () => {
     try {
       const { data: treatmentData } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/guidance_list`
+        `https://server.pediatricorthocare.com/guidance_list`
       );
       setTreatments(treatmentData);
     } catch (err) {

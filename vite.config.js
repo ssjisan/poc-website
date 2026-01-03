@@ -3,18 +3,17 @@ import { defineConfig, loadEnv } from "vite";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => {
-  //eslint-disable-next-line
   const env = loadEnv(mode, process.cwd(), "");
   return {
     define: {
-      "process.env.REACT_APP_SERVER_API": JSON.stringify(
-        env.REACT_APP_SERVER_API
-      ),
+      "process.env.VITE_SERVER_API": JSON.stringify(env.VITE_SERVER_API),
     },
     plugins: [react()],
-    build: { chunkSizeWarningLimit: 1600 },
+    assetsInclude: ["**/*.lottie"],
+    build: { chunkSizeWarningLimit: 3200 },
     server: {
-      port: 5174, // Set your desired port here
+      host: true, // Enables LAN access (0.0.0.0)
+      port: 5174, // Or any port you want
     },
   };
 });

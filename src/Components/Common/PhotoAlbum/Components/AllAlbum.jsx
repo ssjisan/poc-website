@@ -18,7 +18,7 @@ export default function AllAlbum() {
   const loadAlbums = async () => {
     try {
       const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/albums`
+        `https://server.pediatricorthocare.com/albums`
       );
       // Only take the first 3 items
       const limitedAlbums = data.slice(0, 3);
@@ -52,7 +52,7 @@ export default function AllAlbum() {
                     sx={{ mt: "16px" }}
                     width="40%" // Adjust width as necessary
                   />
-                  <Skeleton variant="text" width="40%" sx={{ mt: "16px" }}/>
+                  <Skeleton variant="text" width="40%" sx={{ mt: "16px" }} />
                 </Stack>
               </Grid>
             )

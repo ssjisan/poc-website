@@ -23,9 +23,7 @@ export default function VideoCardDeck() {
 
   const loadVideos = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/list_videos`
-      );
+      const { data } = await axios.get(`/list_videos`);
       // Only take the first 3 items
       const latestVideos = data.slice(0, 3);
       setLatestVideos(latestVideos);
@@ -39,9 +37,7 @@ export default function VideoCardDeck() {
 
   const loadExerciseVideos = async () => {
     try {
-      const { data } = await axios.get(
-        `${process.env.REACT_APP_SERVER_API}/list-exercise-videos`
-      );
+      const { data } = await axios.get("/list-exercise-videos");
       setAllExerciseVideos(data);
     } catch (err) {
       toast.error("Problem loading exercise videos");

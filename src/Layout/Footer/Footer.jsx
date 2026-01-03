@@ -64,15 +64,20 @@ export default function Footer() {
           >
             {main.map((data) => {
               return (
-                <Link to={data.link} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-                <Box key={data.id}>
-                  <Typography
-                    color="text.primary"
-                    sx={{ textDecoration: "underline" }}
-                  >
-                    {data.title}
-                  </Typography>
-                </Box>
+                <Link
+                  to={data.link}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                >
+                  <Box key={data.id}>
+                    <Typography
+                      color="text.primary"
+                      sx={{ textDecoration: "underline" }}
+                    >
+                      {data.title}
+                    </Typography>
+                  </Box>
                 </Link>
               );
             })}
@@ -80,17 +85,17 @@ export default function Footer() {
         </Stack>
         <Box sx={BottomSx}>
           <Typography variant="body1" color="text.secondary">
-          Pediatric Orthocare © {currentYear}
+            Pediatric Orthocare © {currentYear}
           </Typography>
           <Typography variant="body1" color="text.secondary">
             Powered By{" "}
             <Box component="span" sx={{ textDecoration: "underline" }}>
               <Link
-                to="https://insighttechbd.com/"
+                to="https://codesenate.com/"
                 target="_blank"
                 style={{ textDecoration: "none", color: "inherit" }}
               >
-                Insighttech Bangladesh
+                CodeSenate
               </Link>
             </Box>
           </Typography>
