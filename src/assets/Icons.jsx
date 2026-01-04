@@ -289,7 +289,7 @@ export const ArrowLeft = ({ color, size }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M19.92 8.94995L13.4 15.47C12.63 16.24 11.37 16.24 10.6 15.47L4.08002 8.94995"
+          d="M15 19.9201L8.48003 13.4001C7.71003 12.6301 7.71003 11.3701 8.48003 10.6001L15 4.08008"
           stroke={color}
           strokeWidth="1.5"
           strokeMiterlimit="10"
@@ -320,7 +320,7 @@ export const ArrowRight = ({ color, size }) => {
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M19.92 8.94995L13.4 15.47C12.63 16.24 11.37 16.24 10.6 15.47L4.08002 8.94995"
+          d="M8.90997 19.9201L15.43 13.4001C16.2 12.6301 16.2 11.3701 15.43 10.6001L8.90997 4.08008"
           stroke={color}
           strokeWidth="1.5"
           strokeMiterlimit="10"

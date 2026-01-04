@@ -1,91 +1,97 @@
 import { Box, IconButton, Modal, useMediaQuery } from "@mui/material";
-// import { Cross } from "../../../assets/IconSet";
 import PropTypes from "prop-types";
 import { Cross } from "../../../assets/Icons";
 
-export default function VideoPlayer({ open, handleCloseVideoPlayer, selectedVideo }) {
-  const forBelow767 = useMediaQuery("(max-width:767px)");
-
-  // Styles for the modal and video container
-  const GalleryStyle = {
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    width: forBelow767 ? "90%" : "70%", // 90% for mobile, 70% for larger screens
-    height: "auto",
-    p: 0,
-    border: "0px solid transparent",
-    boxShadow: 0,
-    position: "relative",
-  };
+export default function VideoPlayer({
+  open,
+  handleCloseVideoPlayer,
+  selectedVideo,
+}) {
+  const isMobile = useMediaQuery("(max-width:767px)");
 
   const convertToEmbedUrl = (url) => {
-    if (url.includes("youtube.com/watch?v=")) {
-      // Strip out any additional parameters by splitting at '&'
-      const videoId = url.split("watch?v=")[1].split("&")[0];
-      return `https://www.youtube.com/embed/${videoId}`;
-    } else if (url.includes("youtu.be/")) {
-      const videoId = url.split("youtu.be/")[1].split("&")[0];
-      return `https://www.youtube.com/embed/${videoId}`;
-    } else if (url.includes("drive.google.com/file/d/")) {
-      const videoId = url.split("/d/")[1].split("/")[0];
-      return `https://drive.google.com/file/d/${videoId}/preview`;
+    if (!url || typeof url !== "string") return "";
+
+    if (url.includes("youtube.com/watch")) {
+      return url.replace("watch?v=", "embed/");
     }
-    return ""; // Return an empty string if the format is not recognized
+
+    if (url.includes("youtu.be")) {
+      return url.replace("youtu.be/", "www.youtube.com/embed/");
+    }
+
+    return url;
   };
-  const embedUrl = selectedVideo ? convertToEmbedUrl(selectedVideo) : "";
+
+  const embedUrl = convertToEmbedUrl(selectedVideo);
+
+  if (!embedUrl) return null;
 
   return (
     <Modal
       open={open}
       onClose={handleCloseVideoPlayer}
-      sx={{
+      slotProps={{
         backdrop: {
-          backgroundColor: "rgba(0, 32, 51, 0.64)",
+          sx: {
+            backgroundColor: "rgba(0, 32, 51, 0.45)",
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+          },
         },
       }}
     >
-      <Box sx={GalleryStyle}>
-        {/* Close Button */}
-        <IconButton
-          onClick={handleCloseVideoPlayer}
-          sx={{
-            position: "absolute",
-            top: 10, // 10 pixels from the top
-            right: 10, // 10 pixels from the right
-            zIndex: "1000", // High z-index to keep it on top
-            bgcolor: "white", // Button background color
-            "&:hover": {
-              bgcolor: "rgba(255, 0, 0, 0.5)", // Change color on hover
-            },
-          }}
-        >
-          <Cross size={24} color="red" />
-        </IconButton>
-
-        {/* Responsive Video Player */}
+      <Box
+        sx={{
+          position: "fixed",
+          inset: 0,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          p: 2,
+        }}
+      >
+        {/* Video Wrapper */}
         <Box
           sx={{
             position: "relative",
-            width: "100%",
-            height: 0,
-            paddingBottom: "56.25%", // 16:9 Aspect Ratio
+            width: isMobile ? "100%" : "70%",
+            maxWidth: "960px",
+            aspectRatio: "16 / 9",
+            borderRadius: "12px",
             overflow: "hidden",
+            bgcolor: "#000",
           }}
         >
-          <iframe
-            src={embedUrl}
-            style={{
+          {/* Close Button */}
+          <IconButton
+            onClick={handleCloseVideoPlayer}
+            sx={{
               position: "absolute",
-              top: 0,
-              left: 0,
+              top: 12,
+              right: 12,
+              zIndex: 10,
+              bgcolor: "#fff",
+              "&:hover": {
+                bgcolor: "#f5f5f5",
+              },
+            }}
+          >
+            <Cross size={22} color="red" />
+          </IconButton>
+
+          {/* Video iframe */}
+          <Box
+            component="iframe"
+            src={embedUrl}
+            title="Video Player"
+            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            sx={{
               width: "100%",
               height: "100%",
               border: "none",
             }}
-            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            title="YouTube Video Preview"
           />
         </Box>
       </Box>
@@ -94,7 +100,7 @@ export default function VideoPlayer({ open, handleCloseVideoPlayer, selectedVide
 }
 
 VideoPlayer.propTypes = {
-  open: PropTypes.bool.isRequired, // Indicates whether the modal is open
-  handleCloseVideoPlayer: PropTypes.func.isRequired, // Function to close the modal
-  selectedVideo: PropTypes.string.isRequired, // The video URL to be played
+  open: PropTypes.bool.isRequired,
+  handleCloseVideoPlayer: PropTypes.func.isRequired,
+  selectedVideo: PropTypes.string.isRequired,
 };
