@@ -19,8 +19,8 @@ export default function PhotoAlbums() {
             sx={{ width: "100%", maxWidth: "646px", textAlign: "center" }}
             gap="8px"
           >
-            <Typography variant="h1">
-            Rebuilding Children's Bones, Rejuvenating Lives.
+            <Typography variant="h3">
+              Rebuilding Children's Bones, Rejuvenating Lives.
             </Typography>
             <Typography color="text.secondary" variant="h6">
               A curated collection of images capturing patient stories, events,
@@ -30,7 +30,10 @@ export default function PhotoAlbums() {
         </Stack>
         <AllAlbum />
         {location.pathname === "/" && (
-          <Link to="/gallery" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+          <Link
+            to="/gallery"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             <Button variant="contained">See All</Button>
           </Link>
         )}

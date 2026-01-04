@@ -27,9 +27,9 @@ export default function VideoGallery() {
             gap="8px"
           >
             {location.pathname === "/exercise_video" ? (
-              <Typography variant="h1">Exercise, the key of cure</Typography>
+              <Typography variant="h3">Exercise, the key of cure</Typography>
             ) : (
-              <Typography variant="h1">A-Z for children diseases</Typography>
+              <Typography variant="h3">A-Z for children diseases</Typography>
             )}
             {location.pathname === "/exercise_video" ? (
               <Typography color="text.secondary" variant="h6">

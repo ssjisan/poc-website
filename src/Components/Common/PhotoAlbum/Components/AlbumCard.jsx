@@ -16,17 +16,17 @@ export default function AlbumCard({ data }) {
     alignItems: "center",
     width: "110px",
   };
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const [selectedAlbum, setSelectedAlbum] = useState([]);
 
   const [open, setOpen] = useState(false);
   const handleOpenPhotoViewer = (data) => {
     setOpen(true);
-    setSelectedAlbum(data)
+    setSelectedAlbum(data);
   };
   const handleClosePhotoViewer = () => {
-    setOpen(false)
-  }
-  
+    setOpen(false);
+  };
+
   return (
     <>
       <Stack
@@ -69,7 +69,11 @@ export default function AlbumCard({ data }) {
           </Box>
         </Box>
       </Stack>
-      <PhotoViewer open={open} selectedAlbum={selectedAlbum} handleClosePhotoViewer={handleClosePhotoViewer}/>
+      <PhotoViewer
+        open={open}
+        selectedAlbum={selectedAlbum}
+        handleClosePhotoViewer={handleClosePhotoViewer}
+      />
     </>
   );
 }
